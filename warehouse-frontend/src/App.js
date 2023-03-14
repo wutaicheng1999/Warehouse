@@ -4,9 +4,9 @@ function App() {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch("https://warehouse-function.azurewebsites.net/api/user/list?code=Vy_PvT8ZP7UFOgZifjbhDxFn7OadO58WcT5msrD5AmhrAzFu-TXRfg%3D%3D", {
+    const response = await fetch("https://warehouse-function.azurewebsites.net/api/user/list", {
       method: "GET",
-      headers: { 'accept': 'application/json'},
+      headers: { 'accept': 'application/json', 'x-functions-key': 'Vy_PvT8ZP7UFOgZifjbhDxFn7OadO58WcT5msrD5AmhrAzFu-TXRfg=='},
     });
     const jsonData = await response.json();
     console.log(jsonData);

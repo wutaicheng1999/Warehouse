@@ -1,0 +1,74 @@
+---
+openapi: 3.0.1
+info:
+  title: defaultTitle
+  description: defaultDescription
+  version: "0.1"
+servers:
+- url: https://warehouse-function.azurewebsites.net
+paths:
+  /api/user/create:
+    post:
+      description: Write the respective information into the database
+      parameters:
+      - name: x-functions-key
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: Vy_PvT8ZP7UFOgZifjbhDxFn7OadO58WcT5msrD5AmhrAzFu-TXRfg==
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shipping-info'
+        required: true
+      responses:
+        "200":
+          description: Created
+        "400":
+          description: Bad Request
+  /api/user/list:
+    get:
+      description: Get all shippings from the database
+      parameters:
+      - name: x-functions-key
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: Vy_PvT8ZP7UFOgZifjbhDxFn7OadO58WcT5msrD5AmhrAzFu-TXRfg==
+      responses:
+        "200":
+          description: Fetch all shippings from database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                "0":
+                  value: '[{"Date": "March 1, 2022", "WarehouseID": "de56ee2d-9192-4667-81c9-bd11c4c46540", "ShippingPO": "cabfd360-ee40-4f85-ae08-d6c401be8860", "ShipmentID": "3", "BoxesRcvd": "2"}, {"Date": "May 5, 2022", "WarehouseID": "95ce7567-0144-4198-a1db-d8e4f7494f1e", "ShippingPO": "488ad755-9082-4f29-b90a-ce143f34d48d", "ShipmentID": "5", "BoxesRcvd": "10"}]'
+      servers:
+      - url: https://warehouse-function.azurewebsites.net
+    servers:
+    - url: https://warehouse-function.azurewebsites.net
+components:
+  schemas:
+    Shipping-info:
+      type: object
+      properties:
+        Date:
+          type: string
+        WarehouseID:
+          type: string
+        ShippingPO:
+          type: string
+        ShipmentID:
+          type: string
+        BoxesRcvd:
+          type: string
